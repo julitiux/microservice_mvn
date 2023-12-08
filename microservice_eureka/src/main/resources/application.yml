@@ -12,4 +12,4 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     server-url:
-      defaultZone: http://localhost:8761
+      defaultZone: http://localhost:${server.port}/eureka/
