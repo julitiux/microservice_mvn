@@ -13,3 +13,10 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   config:
     import: optional:configserver:http://localhost:8080
+
+eureka:
+  instance:
+    hostname:
+  client:
+    server-url:
+      defaultZone: http://localhost:8761/eureka
