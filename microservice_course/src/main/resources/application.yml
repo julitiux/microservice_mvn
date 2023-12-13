@@ -2,21 +2,21 @@ spring:
   application:
     name: msvc-course
   datasource:
-    driver-class-name: org.postgresql.driver
     url: jdbc:postgresql://localhost:5423/db
     username: user
     password: secret
   jpa:
     hibernate:
       ddl-auto: create-drop
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   config:
-    import: optional:configserver:http://localhost:8080
+    import: optional:configserver:http://localhost:8888
 
 eureka:
   instance:
-    hostname:
+    hostname: localhost
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://localhost:8761/eureka/
