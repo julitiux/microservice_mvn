@@ -5,15 +5,15 @@ spring:
   application:
     name: msvc-student
   datasource:
-    driver-class-name: org.postgresql.driver
     url: jdbc:postgresql://localhost:5423/db
     username: user
     password: secret
   jpa:
     hibernate:
       ddl-auto: create-drop
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   config:
     import: optional:configserver:http://localhost:8888
 
