@@ -1,6 +1,8 @@
 package com.microservice_student.controller;
 
+import com.microservice_student.command.StudentCommand;
 import com.microservice_student.entities.Student;
+import com.microservice_student.mapper.StudentMapper;
 import com.microservice_student.services.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +24,8 @@ public class StudentController {
   }
 
   @PostMapping("/create")
-  public ResponseEntity<Object> saveStudent(@RequestBody Student student) {
-    var studentSaves = studentService.save(student);
+  public ResponseEntity<Object> saveStudent(@RequestBody StudentCommand command) {
+    var studentSaves = studentService.save(StudentMapper.of(command));
     return Objects.nonNull(studentSaves.getId())
       ? new ResponseEntity<>(studentSaves, HttpStatus.CREATED)
       : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
