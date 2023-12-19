@@ -1,5 +1,6 @@
-package com.microservice_student.entities;
+package com.microservice_student.controller;
 
+import com.microservice_student.entities.Student;
 import com.microservice_student.services.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
