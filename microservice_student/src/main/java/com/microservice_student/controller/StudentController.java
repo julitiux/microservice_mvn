@@ -1,7 +1,6 @@
 package com.microservice_student.controller;
 
 import com.microservice_student.command.StudentCommand;
-import com.microservice_student.entities.Student;
 import com.microservice_student.mapper.StudentMapper;
 import com.microservice_student.services.StudentService;
 import org.springframework.http.HttpStatus;
