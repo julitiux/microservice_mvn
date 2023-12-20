@@ -24,9 +24,9 @@ public class StudentController {
 
   @PostMapping("/create")
   public ResponseEntity<Object> saveStudent(@RequestBody StudentCommand command) {
-    var studentSaves = studentService.save(StudentMapper.of(command));
-    return Objects.nonNull(studentSaves.getId())
-      ? new ResponseEntity<>(studentSaves, HttpStatus.CREATED)
+    var studentSaved = studentService.save(StudentMapper.of(command));
+    return Objects.nonNull(studentSaved.getId())
+      ? new ResponseEntity<>(StudentMapper.of(studentSaved), HttpStatus.CREATED)
       : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
 
