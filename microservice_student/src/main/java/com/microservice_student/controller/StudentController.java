@@ -3,7 +3,6 @@ package com.microservice_student.controller;
 import com.microservice_student.command.StudentCommand;
 import com.microservice_student.mapper.StudentMapper;
 import com.microservice_student.services.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,6 @@ import java.util.Objects;
 @RequestMapping("/api/student")
 public class StudentController {
 
-  @Autowired
   private final StudentService studentService;
 
   public StudentController(StudentService studentService) {
