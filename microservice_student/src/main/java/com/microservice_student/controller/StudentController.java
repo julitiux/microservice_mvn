@@ -1,14 +1,12 @@
 package com.microservice_student.controller;
 
 import com.microservice_student.command.StudentCommand;
+import com.microservice_student.dto.StudentDTO;
 import com.microservice_student.mapper.StudentMapper;
 import com.microservice_student.services.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -28,6 +26,13 @@ public class StudentController {
     return Objects.nonNull(studentSaved.getId())
       ? new ResponseEntity<>(StudentMapper.of(studentSaved), HttpStatus.CREATED)
       : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<StudentDTO> finById(@PathVariable String id) {
+    return studentService.findById(Long.parseLong(id))
+      .map(student -> new ResponseEntity<>(StudentMapper.of(student), HttpStatus.OK))
+      .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
 }
