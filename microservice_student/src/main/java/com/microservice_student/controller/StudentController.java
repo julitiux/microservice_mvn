@@ -39,11 +39,19 @@ public class StudentController {
   }
 
   @GetMapping("/findAll")
-  public ResponseEntity<List<StudentDTO>> findAll(){
+  public ResponseEntity<List<StudentDTO>> findAll() {
     List<Student> students = studentService.findAll();
     List<StudentDTO> studentDTOS = students.stream().map(StudentMapper::of).collect(Collectors.toList());
     return !Objects.isNull(studentDTOS) ?
       new ResponseEntity<>(studentDTOS, HttpStatus.OK) :
+      new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
+
+  @GetMapping("/search_by_course/{idCourse}")
+  public ResponseEntity<List<StudentDTO>> findByIdCourse(@PathVariable Long idCourse) {
+    var studentList = studentService.findByIdCourse(idCourse);
+    return Objects.nonNull(studentList) ?
+      new ResponseEntity<>(StudentMapper.listOf(studentList), HttpStatus.OK) :
       new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
