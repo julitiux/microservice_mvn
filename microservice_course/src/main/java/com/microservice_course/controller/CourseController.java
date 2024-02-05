@@ -28,14 +28,19 @@ public class CourseController {
       new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<List<CourseDto>> findAll(){
+  @GetMapping("/findAll")
+  public ResponseEntity<List<CourseDto>> findAll() {
     List<Course> courseList = courseService.findAll();
     return !Objects.isNull(courseList) ?
       new ResponseEntity<>(CourseMapper.listOf(courseList), HttpStatus.OK) :
       new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
 
-
+  @GetMapping("/{id}")
+  public ResponseEntity<CourseDto> findById(@PathVariable String id) {
+    return courseService.findById(Long.parseLong(id))
+      .map(course -> new ResponseEntity<>(CourseMapper.of(course), HttpStatus.OK))
+      .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
 }
